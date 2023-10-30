@@ -1,16 +1,29 @@
 package Main;
 
+import entities.Player;
+
+import java.awt.*;
+
 public class Game implements Runnable {
     private GameWindow gameWindow;
     private GamePanel gamePanel;
     private Thread gameThread;
     private final int FPS_SET = 120;
-    private final int UPS_SET = 200;
+    private final int UPS_SET = 100;
+
+    private Player player;
     public Game(){
-        gamePanel = new GamePanel();
+        initClasses();
+        gamePanel = new GamePanel(this);
         gamePanel.setFocusable(true);  //It is used for input focus in the panel
         gameWindow = new GameWindow(gamePanel);
+
         startGameLoop();
+
+    }
+
+    private void initClasses() {
+        player = new Player(200,200);
     }
 
     private void startGameLoop(){
@@ -19,7 +32,11 @@ public class Game implements Runnable {
     }
 
     public void update(){
-        gamePanel.updateGame();
+        player.update();
+    }
+
+    public void render(Graphics g){
+        player.render(g);
     }
 
     @Override
@@ -63,9 +80,14 @@ public class Game implements Runnable {
                 frames  = 0;
                 updates = 0;
             }
-
-
-
         }
+    }
+
+    public Player getPlayer(){
+        return player;
+    }
+
+    public void windowFocusLost() {
+        player.resetDirBooleans();
     }
 }
