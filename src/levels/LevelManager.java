@@ -39,7 +39,7 @@ public class LevelManager {
         g.drawImage(levelSprite[2],0,0,null);
     }
 
-    public  void update(){
+    public void update(){
 
     }
 
