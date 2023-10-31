@@ -1,5 +1,7 @@
 package entities;
 
+import utilz.LoadSave;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -95,26 +97,15 @@ public class Player extends Entity{
     }
 
     private void loadAnimation() {
-        InputStream is = getClass().getResourceAsStream("/player_sprites.png");
-        try {
-            BufferedImage img = ImageIO.read(is);
 
-            animation = new BufferedImage[9][6];
-            for (int j = 0; j < animation.length; j++) {
-                for (int i = 0; i < animation[j].length; i++) {
-                    animation[j][i] = img.getSubimage(i*64,j*40,64,40);
-                }
+        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
 
+        animation = new BufferedImage[9][6];
+        for (int j = 0; j < animation.length; j++) {
+            for (int i = 0; i < animation[j].length; i++) {
+                animation[j][i] = img.getSubimage(i*64,j*40,64,40);
             }
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e){
-                throw new RuntimeException(e);
-            }
         }
     }
 

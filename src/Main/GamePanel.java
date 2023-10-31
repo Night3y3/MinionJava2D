@@ -6,12 +6,8 @@ import Inputs.MouseInputs;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-
-import static utilz.Constants.PlayerConstants.*;
-import static utilz.Constants.Directions.*;
+import static Main.Game.GAME_WIDTH;
+import static Main.Game.GAME_HEIGHT;
 
 public class GamePanel extends JPanel {
     private  MouseInputs mouseInputs;
@@ -28,7 +24,7 @@ public class GamePanel extends JPanel {
     }
 
     private void setPanelSize() {
-        Dimension size = new Dimension(1280,800);
+        Dimension size = new Dimension(GAME_WIDTH,GAME_HEIGHT);
         setPreferredSize(size);
     }
 
